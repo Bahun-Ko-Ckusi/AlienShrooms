@@ -1,0 +1,145 @@
+[gd_scene load_steps=2 format=3 uid="uid://game_ui"]
+
+[ext_resource type="Script" path="res://scripts/ui/game_ui.gd" id="1_ui"]
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_ui")
+
+[node name="TopBar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_constants/separation = 20
+
+[node name="SporeCount" type="HBoxContainer" parent="TopBar"]
+layout_mode = 2
+
+[node name="SporeIcon" type="TextureRect" parent="TopBar/SporeCount"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="SporeLabel" type="Label" parent="TopBar/SporeCount"]
+layout_mode = 2
+text = "Spores: 0"
+
+[node name="MushroomCount" type="HBoxContainer" parent="TopBar"]
+layout_mode = 2
+
+[node name="MushroomIcon" type="TextureRect" parent="TopBar/MushroomCount"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="MushroomLabel" type="Label" parent="TopBar/MushroomCount"]
+layout_mode = 2
+text = "Mushrooms: 0"
+
+[node name="Spacer" type="Control" parent="TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LocationLabel" type="Label" parent="TopBar"]
+layout_mode = 2
+text = "City Center"
+
+[node name="BottomBar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="InteractHint" type="Label" parent="BottomBar"]
+layout_mode = 2
+text = "[E] Interact"
+
+[node name="Spacer" type="Control" parent="BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InventoryBtn" type="Button" parent="BottomBar"]
+layout_mode = 2
+text = "[I] Inventory"
+
+[node name="Minimap" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 150.0
+grow_horizontal = 0
+
+[node name="MinimapViewport" type="SubViewport" parent="Minimap"]
+size = Vector2i(140, 140)
+
+[node name="InventoryPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InventoryContent" type="VBoxContainer" parent="InventoryPanel"]
+layout_mode = 2
+
+[node name="InventoryTitle" type="Label" parent="InventoryPanel/InventoryContent"]
+layout_mode = 2
+text = "Inventory"
+horizontal_alignment = 1
+
+[node name="InventoryGrid" type="GridContainer" parent="InventoryPanel/InventoryContent"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 5
+
+[node name="CloseBtn" type="Button" parent="InventoryPanel/InventoryContent"]
+layout_mode = 2
+text = "Close"
+
+[node name="DialoguePanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="DialogueContent" type="VBoxContainer" parent="DialoguePanel"]
+layout_mode = 2
+
+[node name="NPCName" type="Label" parent="DialoguePanel/DialogueContent"]
+layout_mode = 2
+text = "NPC Name"
+
+[node name="DialogueText" type="RichTextLabel" parent="DialoguePanel/DialogueContent"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+text = "Dialogue text goes here..."
+
+[node name="DialogueOptions" type="VBoxContainer" parent="DialoguePanel/DialogueContent"]
+layout_mode = 2

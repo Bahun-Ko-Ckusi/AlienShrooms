@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://grow_station"]
+
+[ext_resource type="Script" path="res://scripts/objects/growing_station.gd" id="1_station"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_station"]
+size = Vector2(48, 48)
+
+[node name="GrowingStation" type="Area2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_station")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.5, 0.4, 0.3, 1)
+scale = Vector2(3, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_station")
+
+[node name="GrowthTimer" type="Timer" parent="."]
+wait_time = 30.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -30.0
+offset_top = -40.0
+offset_right = 30.0
+offset_bottom = -30.0
+value = 0.0
+show_percentage = false
+
+[node name="StationLabel" type="Label" parent="."]
+offset_left = -40.0
+offset_top = 30.0
+offset_right = 40.0
+offset_bottom = 50.0
+text = "Empty"
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="GrowthTimer" to="." method="_on_growth_timer_timeout"]

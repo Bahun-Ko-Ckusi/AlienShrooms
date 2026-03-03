@@ -1,0 +1,105 @@
+[gd_scene load_steps=5 format=3 uid="uid://simple_world"]
+
+[ext_resource type="Script" path="res://scripts/main/simple_world.gd" id="1_world"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/sky.png" id="2_sky"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/house_exterior.png" id="3_house"]
+[ext_resource type="Texture2D" path="res://assets/sprites/world/house_interior.png" id="4_interior"]
+
+[sub_resource type="RectangleShape2D" id="ground_shape"]
+size = Vector2(6000, 100)
+
+[sub_resource type="RectangleShape2D" id="door_shape"]
+size = Vector2(40, 80)
+
+[sub_resource type="RectangleShape2D" id="interior_ground_shape"]
+size = Vector2(400, 50)
+
+[node name="SimpleWorld" type="Node2D"]
+script = ExtResource("1_world")
+
+[node name="OutsideArea" type="Node2D" parent="."]
+
+[node name="SkyBG" type="ColorRect" parent="OutsideArea"]
+offset_left = -2000.0
+offset_top = -500.0
+offset_right = 3000.0
+offset_bottom = 400.0
+color = Color(0.45, 0.7, 0.9, 1)
+
+[node name="Clouds1" type="Sprite2D" parent="OutsideArea"]
+position = Vector2(200, 120)
+scale = Vector2(2, 1.2)
+texture = ExtResource("2_sky")
+
+[node name="Clouds2" type="Sprite2D" parent="OutsideArea"]
+position = Vector2(700, 100)
+scale = Vector2(1.5, 1)
+texture = ExtResource("2_sky")
+
+[node name="Clouds3" type="Sprite2D" parent="OutsideArea"]
+position = Vector2(1200, 130)
+scale = Vector2(2, 1.2)
+texture = ExtResource("2_sky")
+
+[node name="Ground" type="StaticBody2D" parent="OutsideArea"]
+position = Vector2(0, 400)
+collision_layer = 2
+
+[node name="GroundShape" type="CollisionShape2D" parent="OutsideArea/Ground"]
+position = Vector2(0, 50)
+shape = SubResource("ground_shape")
+
+[node name="GrassVisual" type="ColorRect" parent="OutsideArea/Ground"]
+offset_left = -3000.0
+offset_top = 0.0
+offset_right = 3000.0
+offset_bottom = 20.0
+color = Color(0.3, 0.55, 0.25, 1)
+
+[node name="DirtVisual" type="ColorRect" parent="OutsideArea/Ground"]
+offset_left = -3000.0
+offset_top = 20.0
+offset_right = 3000.0
+offset_bottom = 200.0
+color = Color(0.45, 0.3, 0.15, 1)
+
+[node name="House" type="Sprite2D" parent="OutsideArea"]
+position = Vector2(450, 335)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("3_house")
+
+[node name="DoorTrigger" type="Area2D" parent="OutsideArea"]
+position = Vector2(450, 370)
+collision_layer = 0
+collision_mask = 1
+
+[node name="DoorShape" type="CollisionShape2D" parent="OutsideArea/DoorTrigger"]
+shape = SubResource("door_shape")
+
+[node name="InsideArea" type="Node2D" parent="."]
+visible = false
+
+[node name="InteriorBG" type="Sprite2D" parent="InsideArea"]
+position = Vector2(450, 280)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("4_interior")
+
+[node name="InteriorGround" type="StaticBody2D" parent="InsideArea"]
+position = Vector2(450, 400)
+collision_layer = 2
+
+[node name="GroundShape" type="CollisionShape2D" parent="InsideArea/InteriorGround"]
+shape = SubResource("interior_ground_shape")
+
+[node name="ExitTrigger" type="Area2D" parent="InsideArea"]
+position = Vector2(250, 370)
+collision_layer = 0
+collision_mask = 1
+
+[node name="ExitShape" type="CollisionShape2D" parent="InsideArea/ExitTrigger"]
+shape = SubResource("door_shape")
+
+[node name="Player" type="Node2D" parent="."]
+
+[node name="PlayerSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(200, 350)
